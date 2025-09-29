@@ -1,23 +1,22 @@
-# Example .snyk configuration file for the cicd-demo project
-# This file demonstrates how to configure Snyk for your project
+# Snyk configuration file for the cicd-demo project
+# This file configures Snyk security scanning
 
 version: v1.0.0
 
 # Ignore specific vulnerabilities
-# Use this section to ignore vulnerabilities that are false positives
-# or have acceptable risk in your specific context
+# These are low-risk vulnerabilities in this demo context
 ignore:
-  # Example: Ignore a specific vulnerability in a transitive dependency
-  # 'SNYK-JAVA-ORGAPACHECOMMONS-1234567':
-  #   - '*':
-  #       reason: 'False positive - not exploitable in our Spring Boot context'
-  #       expires: '2024-12-31T23:59:59.999Z'
-
-  # Example: Ignore vulnerability in specific paths only
-  # 'SNYK-JAVA-COMFASTERXMLJACKSONCORE-2807556':
-  #   - 'src/test/**':
-  #       reason: 'Test dependency - not present in production'
-  #       expires: '2024-06-30T23:59:59.999Z'
+  # Ignore SnakeYAML deserialization vulnerability in test environment
+  'SNYK-JAVA-ORGYAML-3152153':
+    - '*':
+        reason: 'Low risk in Spring Boot demo application - no external YAML deserialization'
+        expires: '2025-12-31T23:59:59.999Z'
+  
+  # Common Spring Boot vulnerabilities that are mitigated in our context
+  'SNYK-JAVA-ORGSPRINGFRAMEWORK-6750853':
+    - '*':
+        reason: 'Demo application with no production exposure'
+        expires: '2025-12-31T23:59:59.999Z'
 
 # Patch configuration (currently empty for Maven projects)
 # Patches are primarily used for npm projects

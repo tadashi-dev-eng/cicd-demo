@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 
 @RestController
 public class DataController {
@@ -41,10 +41,9 @@ public class DataController {
         var faker = new Faker();
         var currencies = objectMapper.createArrayNode();
         for (var i = 0; i < 20; i++) {
-            var currency = faker.currency();
             currencies.add(objectMapper.createObjectNode()
-                    .put("name", currency.name())
-                    .put("code", currency.code()));
+                    .put("name", faker.country().name())
+                    .put("code", faker.country().currencyCode()));
         }
         return currencies;
 
